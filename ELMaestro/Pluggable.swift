@@ -20,6 +20,13 @@ public protocol Pluggable {
 
     // Provides the default route to this plugin or feature.
     func startup(_ supervisor: Supervisor)
+
+    #if DEBUG
+    /// Deletes any local data stored by this plugin.
+    ///
+    /// This method is invoked in Debug builds when resetting application data.
+    @objc optional func deletePluginData()
+    #endif
 }
 
 public extension Pluggable {

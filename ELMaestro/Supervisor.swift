@@ -40,6 +40,16 @@ public class Supervisor: NSObject {
             loadPlugin(plugin)
         }
     }
+
+    #if DEBUG
+    /// Deletes any local data stored by the loaded plugins.
+    ///
+    /// This method is invoked in Debug builds when resetting application data. It calls `deletePluginData()` on each
+    /// loaded plugin.
+    public func deleteAllPluginData() {
+        startedPlugins.forEach { $0.deletePluginData?() }
+    }
+    #endif
     
     public func startup() {
         // identify the plugins we will actually load.
